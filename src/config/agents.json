@@ -1,0 +1,154 @@
+{
+  "agents": [
+    {
+      "name": "ai_text_generator",
+      "description": "AI-powered content generation agent. Creates marketing copy, product descriptions, blog articles, social media posts, and any written content using large language models like GPT-4, Claude, or Hugging Face models. Can generate text from scratch or expand existing content. Supports multiple tones (professional, casual, persuasive) and formats.",
+      "skills": ["generate text", "write content", "create article", "blog post", "product description", "marketing copy", "ai writing", "gpt", "llm", "content creation", "copywriting", "social media post", "headline", "tagline", "creative writing", "rewrite", "expand text", "summarize"],
+      "endpoint": "/api/copilot/text-generation"
+    },
+    {
+      "name": "ai_image_generator",
+      "description": "AI image creation and manipulation agent. Generates images from text descriptions using Stable Diffusion, DALL-E, or Midjourney-style models. Can create product photos, marketing visuals, banners, illustrations, and artwork. Also supports image-to-image transformations, upscaling, and style transfer.",
+      "skills": ["generate image", "create picture", "ai art", "stable diffusion", "dall-e", "text to image", "product photo", "banner", "illustration", "artwork", "visual content", "graphic design", "image creation", "render", "visualize", "mock-up", "thumbnail", "hero image", "upscale image"],
+      "endpoint": "/api/copilot/image-generation"
+    },
+    {
+      "name": "ai_translator",
+      "description": "Multi-language translation agent powered by AI. Translates content between languages while preserving context, tone, and meaning. Supports major languages including English, German, French, Spanish, Italian, Portuguese, Chinese, Japanese, and more. Can handle product information, marketing content, and technical documentation. Übersetzen, traduire, traducir, tradurre.",
+      "skills": ["translate", "translation", "localize", "localization", "multilingual", "language", "german", "french", "spanish", "english", "italian", "chinese", "japanese", "portuguese", "convert language", "internationalization", "i18n", "multi-language", "foreign language", "übersetzen", "übersetzung", "deutsch", "französisch", "englisch", "spanisch", "traduire", "traduction", "français", "traducir", "traducción"],
+      "endpoint": "/api/copilot/translation"
+    },
+    {
+      "name": "ai_classifier",
+      "description": "AI classification and tagging agent. Automatically analyzes and categorizes content, images, and data. Uses zero-shot and fine-tuned models for image classification, text categorization, sentiment analysis, and automatic tagging. Helps organize content libraries and product catalogs.",
+      "skills": ["classify", "categorize", "tag", "label", "auto-tag", "image classification", "text classification", "sentiment analysis", "detect", "recognize", "identify", "sort", "organize", "taxonomy", "category assignment", "metadata extraction", "content analysis"],
+      "endpoint": "/api/copilot/classification"
+    },
+    {
+      "name": "data_object_manager",
+      "description": "Core data management agent for Pimcore data objects. Handles creation, modification, deletion, and querying of structured data like products, categories, manufacturers, and any custom entities. Manages object hierarchies, variants, relations, and field-level data. Supports batch operations and complex data structures.",
+      "skills": ["data object", "create object", "update object", "delete object", "product", "category", "manufacturer", "entity", "pim", "product information", "structured data", "object class", "data model", "field", "attribute", "relation", "hierarchy", "variant", "master data"],
+      "endpoint": "/api/data-objects"
+    },
+    {
+      "name": "asset_manager",
+      "description": "Digital asset management (DAM) agent. Manages all media files including images, documents, videos, and archives. Handles upload, organization, metadata management, thumbnail generation, and version control. Supports folder structures, tagging, and asset search.",
+      "skills": ["asset", "image", "photo", "picture", "document", "pdf", "video", "file", "upload", "download", "dam", "digital asset", "media library", "thumbnail", "metadata", "folder", "archive", "attachment", "media file", "binary", "resize"],
+      "endpoint": "/api/assets"
+    },
+    {
+      "name": "document_manager",
+      "description": "CMS document management agent. Creates and manages web pages, email templates, snippets, links, and printable documents. Handles content areas, editables, and dynamic content. Supports multi-site and multi-language document trees.",
+      "skills": ["document", "page", "web page", "cms", "email template", "snippet", "link", "redirect", "landing page", "content page", "editable", "area", "block", "template", "layout", "navigation", "sitemap", "url", "route"],
+      "endpoint": "/api/documents"
+    },
+    {
+      "name": "advanced_search",
+      "description": "Powerful search and discovery agent using Elasticsearch or OpenSearch. Performs full-text search, faceted filtering, and complex queries across all Pimcore data. Supports fuzzy matching, relevance scoring, aggregations, and saved searches.",
+      "skills": ["search", "find", "lookup", "query", "filter", "elasticsearch", "opensearch", "full-text search", "faceted search", "discover", "locate", "retrieve", "search results", "relevance", "fuzzy search", "autocomplete", "suggestions"],
+      "endpoint": "/api/search"
+    },
+    {
+      "name": "data_importer",
+      "description": "Data import agent for bringing external data into Pimcore. Imports from CSV, Excel, XML, JSON files or API endpoints. Supports field mapping, data transformation, validation, and scheduled imports. Handles large datasets with progress tracking and error handling.",
+      "skills": ["import", "import data", "csv import", "excel import", "xml import", "json import", "bulk import", "data migration", "sync", "load data", "ingest", "feed", "upload data", "batch import", "scheduled import", "mapping", "transformation"],
+      "endpoint": "/api/data-importer"
+    },
+    {
+      "name": "data_exporter",
+      "description": "Data export agent for publishing Pimcore data to external systems. Exports to CSV, XML, JSON files or pushes to APIs. Supports configurable field selection, filtering, formatting, and scheduled exports. Can create product feeds for marketplaces.",
+      "skills": ["export", "export data", "csv export", "xml export", "json export", "download data", "extract", "product feed", "data feed", "publish", "sync out", "scheduled export", "file export", "marketplace feed", "channel export"],
+      "endpoint": "/api/data-exporter"
+    },
+    {
+      "name": "graphql_api",
+      "description": "GraphQL API agent for programmatic data access. Provides flexible queries and mutations for data objects, assets, and documents. Supports custom schemas, filtering, pagination, and real-time subscriptions through Pimcore Datahub.",
+      "skills": ["graphql", "api", "query", "mutation", "datahub", "endpoint", "integration", "schema", "rest api", "web service", "headless", "programmatic access", "developer api", "external system", "connect"],
+      "endpoint": "/api/graphql"
+    },
+    {
+      "name": "ecommerce_cart",
+      "description": "Shopping cart management agent. Handles adding/removing products, quantity updates, cart calculations, and session management. Supports multiple carts per user, guest carts, and cart persistence.",
+      "skills": ["cart", "shopping cart", "basket", "add to cart", "remove from cart", "update quantity", "cart items", "shopping bag", "wishlist", "save for later", "cart total", "empty cart", "merge cart"],
+      "endpoint": "/api/ecommerce/cart"
+    },
+    {
+      "name": "ecommerce_checkout",
+      "description": "Checkout process agent. Manages the complete checkout flow including address collection, shipping method selection, payment processing, and order creation. Supports multi-step checkout, guest checkout, and order confirmation.",
+      "skills": ["checkout", "order", "place order", "buy", "purchase", "payment", "shipping", "delivery", "billing address", "shipping address", "complete order", "confirm order", "checkout step", "payment method"],
+      "endpoint": "/api/ecommerce/checkout"
+    },
+    {
+      "name": "ecommerce_pricing",
+      "description": "Pricing and promotion agent. Calculates product prices including base prices, discounts, taxes, and shipping costs. Manages price rules, coupon codes, promotional campaigns, and customer-specific pricing.",
+      "skills": ["price", "pricing", "calculate price", "discount", "coupon", "promotion", "tax", "vat", "shipping cost", "price rule", "special offer", "sale price", "bulk discount", "customer price", "msrp", "margin"],
+      "endpoint": "/api/ecommerce/pricing"
+    },
+    {
+      "name": "customer_manager",
+      "description": "Customer relationship management (CRM) agent. Manages customer profiles, contact information, addresses, preferences, and history. Tracks customer activities, purchases, and interactions. Supports customer authentication and account management.",
+      "skills": ["customer", "user", "account", "profile", "contact", "crm", "member", "subscriber", "lead", "customer data", "address book", "preferences", "customer history", "registration", "login", "password"],
+      "endpoint": "/api/customers"
+    },
+    {
+      "name": "customer_segments",
+      "description": "Customer segmentation agent. Creates and manages customer groups based on behavior, demographics, purchase history, or custom criteria. Enables targeted marketing, personalized content, and analytics by segment.",
+      "skills": ["segment", "customer segment", "audience", "target group", "segmentation", "customer group", "cohort", "demographic", "behavior", "rfi", "rfm", "vip customers", "new customers", "loyal customers", "high value"],
+      "endpoint": "/api/customer-segments"
+    },
+    {
+      "name": "data_quality",
+      "description": "Data quality monitoring agent. Evaluates completeness, accuracy, and consistency of data. Calculates quality scores, identifies missing fields, detects duplicates, and generates improvement recommendations.",
+      "skills": ["data quality", "quality score", "completeness", "validation", "verify", "check data", "missing data", "incomplete", "data audit", "quality report", "data health", "accuracy", "consistency", "duplicate detection"],
+      "endpoint": "/api/data-quality"
+    },
+    {
+      "name": "workflow_manager",
+      "description": "Workflow and state management agent. Controls content lifecycle through configurable workflows. Manages states like draft, review, approved, published. Handles transitions, notifications, and approval processes.",
+      "skills": ["workflow", "state", "status", "transition", "approve", "reject", "publish", "unpublish", "draft", "review", "pending", "approval", "lifecycle", "process", "stage", "submit for review"],
+      "endpoint": "/api/workflows"
+    },
+    {
+      "name": "automation_runner",
+      "description": "Task automation agent for Pimcore Copilot. Executes automated actions on data objects and assets. Supports scheduled jobs, batch processing, and multi-step automation pipelines. Can trigger AI actions, data transformations, and notifications.",
+      "skills": ["automate", "automation", "scheduled task", "cron job", "batch process", "bulk action", "pipeline", "job", "task runner", "execute", "run automation", "scheduled action", "background job", "queue"],
+      "endpoint": "/api/automation"
+    },
+    {
+      "name": "targeting_engine",
+      "description": "Personalization and targeting agent. Manages visitor targeting rules and personalized content delivery. Analyzes visitor behavior, segments, and context to serve relevant content. Supports A/B testing and conversion optimization.",
+      "skills": ["targeting", "personalization", "personalize", "visitor", "targeting rule", "condition", "audience", "a/b test", "conversion", "optimization", "dynamic content", "relevant content", "user experience", "behavioral targeting"],
+      "endpoint": "/api/targeting"
+    },
+    {
+      "name": "statistics_reporter",
+      "description": "Analytics and reporting agent. Generates reports, dashboards, and statistics from Pimcore data. Provides insights on products, sales, customers, and content performance. Supports custom metrics and visualizations.",
+      "skills": ["statistics", "report", "analytics", "dashboard", "metrics", "kpi", "chart", "graph", "visualization", "insight", "performance", "trend", "analysis", "data analysis", "business intelligence", "custom report"],
+      "endpoint": "/api/statistics"
+    },
+    {
+      "name": "webhook_sender",
+      "description": "Event notification agent. Sends webhook notifications to external systems when events occur in Pimcore. Supports configurable triggers, payload customization, and delivery monitoring. Enables real-time integrations.",
+      "skills": ["webhook", "notification", "notify", "callback", "http request", "trigger", "event", "integration", "push notification", "real-time", "external system", "api call", "hook", "listener"],
+      "endpoint": "/api/webhooks"
+    },
+    {
+      "name": "newsletter_manager",
+      "description": "Email marketing and newsletter agent. Manages subscriber lists, email campaigns, and marketing automation. Integrates with services like Mailchimp. Tracks opens, clicks, and engagement metrics.",
+      "skills": ["newsletter", "email marketing", "email campaign", "subscriber", "mailing list", "mailchimp", "marketing email", "campaign", "email blast", "subscribe", "unsubscribe", "open rate", "click rate", "email template"],
+      "endpoint": "/api/newsletter"
+    },
+    {
+      "name": "portal_content",
+      "description": "Portal and frontend experience agent. Manages content for customer portals and web experiences. Handles page layouts, widgets, navigation, and user-specific content. Powers headless and hybrid frontend architectures.",
+      "skills": ["portal", "frontend", "web experience", "landing page", "page builder", "layout", "widget", "component", "template", "navigation", "menu", "header", "footer", "hero section", "content block"],
+      "endpoint": "/api/portal"
+    },
+    {
+      "name": "variant_generator",
+      "description": "Product variant creation agent. Automatically generates product variants from configurable attributes like size, color, material. Creates SKUs, manages variant relationships, and handles inventory per variant.",
+      "skills": ["variant", "product variant", "variation", "size", "color", "material", "sku", "option", "configurable product", "variant matrix", "attribute combination", "child product", "parent product", "variant sku"],
+      "endpoint": "/api/variants"
+    }
+  ]
+}
