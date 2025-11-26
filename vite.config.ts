@@ -4,6 +4,9 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 
 export default defineConfig({
+  // Base path for GitHub Pages deployment
+  base: '/delegatorLLM/',
+
   plugins: [
     react(),
     viteStaticCopy({
