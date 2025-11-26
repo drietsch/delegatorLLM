@@ -47,9 +47,10 @@ function App() {
         <ChatInput
           onSubmit={sendMessage}
           disabled={!isModelReady || isProcessing}
+          showExamples={isModelReady && messages.length === 0}
           placeholder={
             isModelReady
-              ? 'Type your request... (e.g., "Write a blog post about AI")'
+              ? 'Type your request or click an example above...'
               : 'Loading model...'
           }
         />
