@@ -15,6 +15,10 @@ export default defineConfig({
           src: 'node_modules/onnxruntime-web/dist/*.wasm',
           dest: 'wasm',
         },
+        {
+          src: 'node_modules/@litertjs/core/wasm/*',
+          dest: 'litert-wasm',
+        },
       ],
     }),
   ],

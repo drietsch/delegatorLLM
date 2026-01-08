@@ -85,7 +85,7 @@ const mockResponses: Record<string, (query: string) => string> = {
  * Get agent details by name
  */
 export function getAgent(name: string): Agent | undefined {
-  return (agentManifest.agents as Agent[]).find((a) => a.name === name);
+  return (agentManifest.agents as unknown as Agent[]).find((a) => a.name === name);
 }
 
 /**
@@ -115,5 +115,5 @@ export async function executeAgent(
  * Get all available agents
  */
 export function getAllAgents(): Agent[] {
-  return agentManifest.agents as Agent[];
+  return agentManifest.agents as unknown as Agent[];
 }

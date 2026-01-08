@@ -26,3 +26,7 @@ npm-debug.log*
 # Cache
 .cache/
 *.tsbuildinfo
+
+# Large model files (download separately)
+public/models/
+public/tokenizer/

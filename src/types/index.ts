@@ -1,4 +1,25 @@
 /**
+ * Function parameter schema for FunctionGemma
+ */
+export interface FunctionParameter {
+  type: string;
+  description: string;
+}
+
+/**
+ * Function schema for FunctionGemma function calling
+ */
+export interface FunctionSchema {
+  name: string;
+  description: string;
+  parameters: {
+    type: string;
+    properties: Record<string, FunctionParameter>;
+    required?: string[];
+  };
+}
+
+/**
  * Agent descriptor from the manifest
  */
 export interface Agent {
@@ -6,6 +27,7 @@ export interface Agent {
   description: string;
   skills: string[];
   endpoint: string;
+  function?: FunctionSchema;
 }
 
 /**
