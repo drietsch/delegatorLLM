@@ -11,6 +11,7 @@ Imagine your 4/12 chat window is split into two zones:
 1. **Zone A (The Strip):** A narrow, 50px dark vertical bar on the far left.
 2. **Zone B (The Stage):** The remaining width where the actual chat happens.
 
+
 ---
 
 ### 1. Zone A: The "Power Strip" (Navigation & Status)
