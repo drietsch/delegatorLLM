@@ -6,4 +6,3 @@ dist
 fly.toml
 .DS_Store
 *.log
-php-backend
