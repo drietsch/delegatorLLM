@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useRouter } from './useRouter';
+import { API_BASE } from '../config/api';
 
 export interface RoutingResult {
   query: string;
@@ -14,8 +15,6 @@ export interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
 }
-
-const API_BASE = 'http://localhost:3001';
 
 export function useAgentChat() {
   const { route, isReady: isRouterReady, loadingState } = useRouter();

@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect, useRef } from 'react';
 import type { Session, SessionMessage, Notification } from '../types/session';
 import { useRouter } from '../hooks/useRouter';
-
-const API_BASE = 'http://localhost:3001';
+import { API_BASE } from '../config/api';
 
 // Generate unique IDs
 const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;

@@ -19,10 +19,10 @@ import type { MenuProps } from 'antd';
 import type { Agent } from '../../types/session';
 import type { Asset, Attachment } from '../../types/asset';
 import { assetToAttachment } from '../../types/asset';
+import { API_BASE } from '../../config/api';
 import './ChatStage.css';
 
 const { Text, Title } = Typography;
-const API_BASE = 'http://localhost:3001';
 
 // Example prompts
 const examplePrompts = [

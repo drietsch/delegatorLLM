@@ -1,6 +1,8 @@
 import { pipeline, FeatureExtractionPipeline } from '@huggingface/transformers';
 
-const API_BASE = 'http://localhost:3001';
+// Determine API base URL based on environment
+const isLocalhost = self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1';
+const API_BASE = isLocalhost ? 'http://localhost:3001' : '';
 const MODEL_ID = 'Xenova/paraphrase-multilingual-MiniLM-L12-v2';
 const CHUNKING_ID = 'agents:v1';
 const DIMS = 384;
