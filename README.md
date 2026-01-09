@@ -281,4 +281,4 @@ This sets `base: '/delegatorLLM/'` in the Vite config.
 
 ## License
 
-MIT
+POCL
