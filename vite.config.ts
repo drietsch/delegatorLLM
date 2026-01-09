@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// Use /delegatorLLM/ for GitHub Pages, / for Fly.io
+const base = process.env.GITHUB_PAGES ? '/delegatorLLM/' : '/'
+
 export default defineConfig({
   plugins: [react()],
-  base: '/delegatorLLM/',
+  base,
   server: {
     port: 5174,
   },
