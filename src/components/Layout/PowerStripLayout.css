@@ -1,0 +1,35 @@
+/* App Layout - Full width with Asset Tree + Chat Widget */
+.app-layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: #f1f5f9;
+}
+
+/* Asset Panel - Left side (75%) */
+.asset-panel {
+  width: 75%;
+  height: 100%;
+  background: #ffffff;
+}
+
+/* Chat Widget - Right side (25%) */
+.chat-widget {
+  width: 25%;
+  height: 100vh;
+  display: flex;
+  background: #ffffff;
+  position: relative;
+  z-index: 10;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure proper flex behavior */
+.chat-widget > .power-strip {
+  flex-shrink: 0;
+}
+
+.chat-widget > .chat-stage {
+  flex: 1;
+  min-width: 0;
+}

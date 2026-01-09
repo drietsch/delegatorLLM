@@ -1,0 +1,166 @@
+Here is the complete **Technical Design Document** and **Build Instructions** for the **Unified WebLLM Architecture**.
+
+This approach uses **Snowflake Arctic** for routing and **Llama 3.2** for extraction, running entirely on **WebLLM** (WebGPU). This is the most modern, high-performance stack available for browsers in 2026.
+
+---
+
+# Technical Specification: Unified WebLLM Orchestrator
+
+## 1. Executive Summary
+
+We are building a **Pure WebGPU AI Chat Application** that orchestrates 25+ agents. Unlike previous iterations, this architecture removes `transformers.js` entirely, unifying the stack under a single library: **WebLLM**. It leverages **Snowflake Arctic** for high-precision embedding routing and **Llama 3.2** for robust JSON extraction.
+
+## 2. Technology Stack
+
+* **Frontend:** React 18+ (TypeScript) + Vite.
+* **UI Library:** Ant Design (v5).
+* **AI Engine:** `@mlc-ai/web-llm` (v0.2+).
+* **Models:**
+* **Router:** `snowflake-arctic-embed-m-q0f32-MLC` (Embeddings).
+* **Extractor:** `Llama-3.2-3B-Instruct-q4f16_1-MLC` (Generation).
+
+
+* **State Management:** **LangGraph.js** (Optional, but recommended for graph logic) or simple State Machine in Worker.
+* **Hardware Req:** WebGPU-compatible GPU (NVIDIA, Apple Silicon, AMD).
+
+## 3. Architecture Overview
+
+```mermaid
+graph TD
+    User[React UI] -- "1. User Query" --> Worker[Web Worker]
+    
+    subgraph "WebLLM Engine (WebGPU)"
+        Router[Snowflake Arctic Embed]
+        Extractor[Llama 3.2 Instruct]
+    end
+    
+    subgraph "Worker Logic"
+        VectorStore[In-Memory Vector Index]
+        Logic[Routing Logic]
+    end
+
+    Worker -- "2. Embed Query" --> Router
+    Router -- "3. Vector" --> VectorStore
+    VectorStore -- "4. Best Agent Match" --> Logic
+    Logic -- "5. Schema + Prompt" --> Extractor
+    Extractor -- "6. JSON Stream" --> User
+
+```
+
+---
+
+## 4. Implementation Steps for the Coding AI
+
+### Step 1: Project Scaffolding
+
+* **Vite Config:** Standard React + TypeScript setup.
+* **Crucial:** Must include the Security Headers for `SharedArrayBuffer` (required by WebLLM).
+* Headers: `Cross-Origin-Opener-Policy: same-origin`, `Cross-Origin-Embedder-Policy: require-corp`.
+
+
+
+### Step 2: The Agent Data (`src/assets/agents.json`)
+
+* Same JSON structure as before (25 agents with `name`, `description`, `parameters`).
+
+### Step 3: The Unified Worker (`src/worker/ai.worker.ts`)
+
+This is where the magic happens. The worker manages **two** distinct WebLLM engines simultaneously.
+
+1. **Imports:** `CreateMLCEngine` from `@mlc-ai/web-llm`.
+2. **Constants:**
+* `ROUTER_MODEL = "snowflake-arctic-embed-m-q0f32-MLC"`
+* `EXTRACTOR_MODEL = "Llama-3.2-3B-Instruct-q4f16_1-MLC"`
+
+
+3. **Initialization:**
+* Create `routerEngine` instance.
+* Create `extractorEngine` instance.
+* *Optimization Note:* Load them sequentially to avoid spiking VRAM instantly.
+
+
+4. **Indexing (The "Training" Phase):**
+* Loop through `agents.json`.
+* Call `routerEngine.embeddings.create({ input: [agent_description] })`.
+* Store the resulting vector in a simple array: `[{ agent: Agent, vector: number[] }]`.
+
+
+5. **Handling Queries:**
+* **Embed:** Call `routerEngine` with user query  get Vector.
+* **Math:** Calculate Cosine Similarity (Dot product) between query vector and all agent vectors. Pick the winner.
+* **Generate:** Call `extractorEngine.chat.completions.create()`.
+* **System Prompt:** Inject the winner's JSON Schema.
+* **Format:** Use `response_format: { type: "json_object" }` (Native JSON mode).
+
+
+* **Stream:** Send tokens back to UI.
+
+
+
+### Step 4: The UI (`src/App.tsx`)
+
+* **Chat Interface:** Ant Design `List` or `Bubble` components.
+* **Status Indicator:** Show distinct loading bars for "Loading Router..." and "Loading Extractor..." so the user knows why startup takes ~10-20 seconds.
+* **Tool Rendering:** If the final message is JSON, render a `<Card>` component detailing the tool call (e.g., "Adding to Cart: 5x Apples").
+
+---
+
+## 5. The "Mega Prompt" for Coding AI
+
+**Copy and paste this into your coding assistant (Cursor, GitHub Copilot, ChatGPT) to build the app:**
+
+```text
+Act as a Senior AI Engineer. Write a complete, local-first Chat Application using React, Vite, and WebLLM.
+
+### The Stack
+1. Framework: React + Vite + TypeScript.
+2. UI Library: Ant Design (antd).
+3. AI Engine: @mlc-ai/web-llm (Pure WebGPU).
+4. Architecture: "Unified WebLLM" (Router + Extractor in one library).
+
+### Core Logic (Web Worker)
+You must implement a Web Worker (`src/worker/ai.worker.ts`) that runs TWO models:
+1. **The Router:** `snowflake-arctic-embed-m-q0f32-MLC`
+   - Role: Embeds user queries and agent descriptions to find the best match.
+   - Use `engine.embeddings.create()` API.
+   - On init, "Index" the `agents.json` file by converting all descriptions to vectors.
+
+2. **The Extractor:** `Llama-3.2-3B-Instruct-q4f16_1-MLC`
+   - Role: Takes the User Query + Selected Agent Schema and generates valid JSON.
+   - Use `engine.chat.completions.create()` API.
+   - Use `response_format: { type: "json_object" }` to force valid JSON.
+
+### Requirements
+1. **Vite Config:** Configure `vite.config.ts` with the required Security Headers (COOP/COEP) for WebGPU.
+2. **Math:** Implement a simple `cosineSimilarity` function in TypeScript to match the user query vector to the agent vectors.
+3. **UI:** A clean Chat UI (Ant Design) that:
+   - Shows loading progress for BOTH models during startup.
+   - Streams the text response.
+   - If the response is a JSON Tool Call, render it as a UI Card.
+
+### Data
+Use this `agents.json` structure (assume 25 agents like 'ai_text_generator', 'ecommerce_cart', etc.):
+```json
+[
+  {
+    "name": "ai_text_generator",
+    "description": "Generates text...",
+    "skills": ["write", "blog"],
+    "function": { "parameters": { ... } }
+  }
+  // ... assume standard agent list
+]
+
+```
+
+Please generate the following files:
+
+1. `vite.config.ts`
+2. `src/lib/math.ts` (Vector logic)
+3. `src/worker/ai.worker.ts` (The detailed WebLLM logic)
+4. `src/hooks/useWebLLM.ts` (React hook to bridge worker)
+5. `src/App.tsx` (The UI)
+
+```
+
+```

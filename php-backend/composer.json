@@ -1,0 +1,13 @@
+{
+    "name": "local-llm/neuronai-backend",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Dietmar Rietsch",
+            "email": "dietmar.rietsch@pimcore.com"
+        }
+    ],
+    "require": {
+        "inspector-apm/neuron-ai": "^2.10"
+    }
+}

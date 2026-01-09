@@ -1,0 +1,177 @@
+/* Asset Tree Container */
+.asset-tree-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+}
+
+.asset-tree-header {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%);
+}
+
+.asset-tree-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 12px;
+}
+
+.asset-tree-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.asset-tree-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.asset-tree-content::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 3px;
+}
+
+.asset-tree-content::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Tree Node Styling */
+.asset-tree-content .ant-tree {
+  background: transparent;
+  font-size: 13px;
+}
+
+.asset-tree-content .ant-tree-treenode {
+  padding: 2px 0;
+  transition: all 0.15s ease;
+  border-radius: 6px;
+  margin-bottom: 2px;
+}
+
+.asset-tree-content .ant-tree-treenode:hover {
+  background: #f8fafc;
+}
+
+.asset-tree-content .ant-tree-treenode-selected {
+  background: rgba(99, 102, 241, 0.08) !important;
+}
+
+.asset-tree-content .ant-tree-node-content-wrapper {
+  padding: 4px 8px !important;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.asset-tree-content .ant-tree-node-content-wrapper:hover {
+  background: transparent !important;
+}
+
+.asset-tree-content .ant-tree-node-selected {
+  background: transparent !important;
+}
+
+/* Folder Icon */
+.folder-icon {
+  color: #f59e0b !important;
+  font-size: 14px !important;
+}
+
+/* Asset Node (thumbnail + name) */
+.asset-node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+}
+
+.asset-node:active {
+  cursor: grabbing;
+}
+
+.asset-thumbnail {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #e2e8f0;
+}
+
+.asset-name {
+  color: #334155;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+/* Asset Type Icons */
+.asset-type-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.asset-type-icon.image {
+  color: #6366f1;
+}
+
+.asset-type-icon.video {
+  color: #ec4899;
+}
+
+.asset-type-icon.document {
+  color: #f59e0b;
+}
+
+/* Drag Ghost */
+.drag-ghost {
+  position: fixed;
+  top: -1000px;
+  left: -1000px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  color: #334155;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.drag-ghost img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* Tree Lines */
+.asset-tree-content .ant-tree-switcher {
+  width: 20px !important;
+}
+
+.asset-tree-content .ant-tree-indent-unit {
+  width: 16px !important;
+}
+
+/* Selection styling */
+.asset-tree-content .ant-tree-treenode-selected .asset-name {
+  color: #4f46e5;
+  font-weight: 500;
+}
+
+/* Dragging state */
+.asset-tree-content .ant-tree-treenode-draggable.dragging {
+  opacity: 0.5;
+}
+
+/* Show line styling */
+.asset-tree-content .ant-tree-show-line .ant-tree-indent-unit::before {
+  border-color: #e2e8f0 !important;
+}

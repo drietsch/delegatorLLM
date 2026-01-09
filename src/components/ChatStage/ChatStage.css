@@ -1,0 +1,407 @@
+/* Chat Stage - Optimized for narrow width (25% of screen minus 48px PowerStrip) */
+
+.chat-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(180deg, #fafbfc 0%, #f1f5f9 100%);
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Loading Card */
+.loading-card {
+  margin: 10px;
+  border-radius: 14px !important;
+  border: none !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+  background: white !important;
+}
+
+.loading-card .ant-card-body {
+  padding: 14px !important;
+}
+
+.loading-icon {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+/* Welcome Section */
+.welcome-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.welcome-header {
+  margin-bottom: 20px;
+}
+
+.welcome-icon {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  border-radius: 18px;
+  padding: 18px;
+  display: inline-flex;
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.3);
+  position: relative;
+}
+
+.welcome-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+}
+
+.welcome-header h4 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.3px;
+  color: #0f172a !important;
+  margin: 14px 0 6px !important;
+}
+
+.welcome-prompts {
+  width: 100%;
+}
+
+/* Prompts styling - compact for narrow width */
+.welcome-prompts .ant-prompts-list {
+  gap: 6px !important;
+}
+
+.welcome-prompts .ant-prompts-item {
+  background: white !important;
+  border-radius: 10px !important;
+  border: 1px solid #e2e8f0 !important;
+  transition: all 0.2s ease !important;
+  padding: 10px 12px !important;
+  font-size: 12px !important;
+}
+
+.welcome-prompts .ant-prompts-item:hover {
+  border-color: #6366f1 !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.12) !important;
+  transform: translateY(-1px);
+}
+
+/* Messages Container */
+.messages-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 8px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.messages-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+  border-radius: 14px 14px 0 0;
+}
+
+.messages-header span {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: -0.2px;
+  color: #1e293b;
+}
+
+.bubble-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  scroll-behavior: smooth;
+}
+
+.bubble-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.bubble-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bubble-list::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 2px;
+}
+
+/* Avatars - compact */
+.avatar-user {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+}
+
+.avatar-assistant {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.25);
+}
+
+/* Bubble styling - compact */
+.bubble-list .ant-bubble {
+  max-width: 90% !important;
+}
+
+.bubble-list .ant-bubble-content {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  letter-spacing: -0.1px;
+}
+
+/* Input Container */
+.input-container {
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #f1f5f9;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Drag over state */
+.input-container.drag-over {
+  background: rgba(99, 102, 241, 0.04);
+  border-color: #6366f1;
+}
+
+.input-container.drag-over .ant-sender {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Drop overlay */
+.drop-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(99, 102, 241, 0.1);
+  border: 2px dashed #6366f1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.drop-overlay span {
+  background: #6366f1;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Sender styling - compact */
+.input-container .ant-sender {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #fafbfc !important;
+  transition: all 0.2s ease !important;
+}
+
+.input-container .ant-sender:focus-within {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1) !important;
+  background: white !important;
+}
+
+.input-container .ant-sender-input {
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  padding: 8px 10px !important;
+}
+
+.input-container .ant-sender-input::placeholder {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* Footer switches - compact */
+.input-container .ant-sender-footer {
+  padding: 6px 4px !important;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* Notification Stack */
+.notification-stack {
+  position: absolute;
+  bottom: 80px;
+  left: 8px;
+  right: 8px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.notification-stack > * {
+  pointer-events: auto;
+}
+
+/* Notification Pill - compact */
+.notification-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border-radius: 12px;
+  padding: 8px 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  animation: slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notification-pill.dismissing {
+  animation: slide-down 0.25s ease-in forwards;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+}
+
+.pill-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.pill-icon.success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.pill-icon.error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.pill-message {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1e293b;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tags - compact */
+.messages-header .ant-tag {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  font-size: 10px !important;
+  padding: 1px 6px !important;
+  border: none !important;
+  line-height: 1.4 !important;
+}
+
+/* Progress bar */
+.loading-card .ant-progress-bg {
+  background: linear-gradient(90deg, #6366f1, #a855f7) !important;
+}
+
+/* Alert styling */
+.chat-stage .ant-alert {
+  border-radius: 10px !important;
+  border: none !important;
+  margin: 8px !important;
+  font-size: 12px !important;
+}
+
+/* Typography refinements */
+.chat-stage h4 {
+  font-weight: 700 !important;
+  letter-spacing: -0.3px !important;
+}
+
+.chat-stage .ant-typography-secondary {
+  color: #64748b !important;
+  font-size: 12px !important;
+}
+
+/* Switch/Button styling in footer - compact */
+.input-container .ant-btn-switch {
+  border-radius: 8px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  padding: 2px 8px !important;
+  height: auto !important;
+}
+
+/* Sender action buttons */
+.input-container .ant-sender-actions-list {
+  gap: 4px !important;
+}
+
+.input-container .ant-sender-actions-btn {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+/* Background button */
+.input-container button {
+  font-size: 11px !important;
+}
+
+/* Dropdown agent selector - make it work in narrow space */
+.input-container .ant-dropdown-trigger {
+  max-width: 100%;
+}
+
+/* Hide labels on very narrow, show only icons */
+@media (max-width: 350px) {
+  .input-container .ant-btn-switch span:not(.anticon) {
+    display: none;
+  }
+}
