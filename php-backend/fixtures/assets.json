@@ -1,0 +1,220 @@
+[
+  {
+    "id": "asset_001",
+    "filename": "product-laptop-pro-15-hero.jpg",
+    "path": "/images/products/laptops/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 245000,
+    "metadata": {
+      "alt": "Professional Laptop 15 Pro front view on desk",
+      "title": "TechPro Professional Laptop",
+      "tags": ["laptop", "product", "hero", "featured"],
+      "width": 2400,
+      "height": 1600
+    }
+  },
+  {
+    "id": "asset_002",
+    "filename": "product-laptop-pro-15-side.jpg",
+    "path": "/images/products/laptops/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 198000,
+    "metadata": {
+      "alt": "Professional Laptop 15 Pro side profile showing ports",
+      "title": "TechPro Laptop Side View",
+      "tags": ["laptop", "product", "ports", "connectivity"],
+      "width": 2400,
+      "height": 1600
+    }
+  },
+  {
+    "id": "asset_003",
+    "filename": "smartphone-x12-pro-lifestyle.jpg",
+    "path": "/images/products/phones/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 320000,
+    "metadata": {
+      "alt": "SmartPhone X12 Pro in hand showing camera features",
+      "title": "X12 Pro Lifestyle Shot",
+      "tags": ["smartphone", "lifestyle", "camera", "featured"],
+      "width": 3000,
+      "height": 2000
+    }
+  },
+  {
+    "id": "asset_004",
+    "filename": "headphones-wireless-studio.jpg",
+    "path": "/images/products/audio/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 175000,
+    "metadata": {
+      "alt": "Wireless Noise-Canceling Headphones studio shot",
+      "title": "AudioMax Headphones",
+      "tags": ["headphones", "audio", "studio", "product"],
+      "width": 2000,
+      "height": 2000
+    }
+  },
+  {
+    "id": "asset_005",
+    "filename": "office-setup-ergonomic.jpg",
+    "path": "/images/lifestyle/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 456000,
+    "metadata": {
+      "alt": "Complete ergonomic office setup with standing desk and chair",
+      "title": "Ergonomic Workspace",
+      "tags": ["office", "ergonomic", "lifestyle", "workspace"],
+      "width": 4000,
+      "height": 2667
+    }
+  },
+  {
+    "id": "asset_006",
+    "filename": "product-catalog-2024.pdf",
+    "path": "/documents/catalogs/",
+    "type": "document",
+    "mimeType": "application/pdf",
+    "size": 5240000,
+    "metadata": {
+      "title": "Product Catalog 2024",
+      "tags": ["catalog", "products", "2024", "download"],
+      "pages": 48,
+      "language": "en"
+    }
+  },
+  {
+    "id": "asset_007",
+    "filename": "brand-guidelines.pdf",
+    "path": "/documents/brand/",
+    "type": "document",
+    "mimeType": "application/pdf",
+    "size": 2890000,
+    "metadata": {
+      "title": "Brand Guidelines 2024",
+      "tags": ["brand", "guidelines", "internal", "design"],
+      "pages": 32,
+      "language": "en"
+    }
+  },
+  {
+    "id": "asset_008",
+    "filename": "company-logo-primary.svg",
+    "path": "/images/brand/",
+    "type": "image",
+    "mimeType": "image/svg+xml",
+    "size": 12400,
+    "metadata": {
+      "alt": "Company primary logo",
+      "title": "Primary Logo",
+      "tags": ["logo", "brand", "primary", "vector"],
+      "format": "svg"
+    }
+  },
+  {
+    "id": "asset_009",
+    "filename": "company-logo-white.svg",
+    "path": "/images/brand/",
+    "type": "image",
+    "mimeType": "image/svg+xml",
+    "size": 11800,
+    "metadata": {
+      "alt": "Company white logo for dark backgrounds",
+      "title": "White Logo",
+      "tags": ["logo", "brand", "white", "dark-mode"],
+      "format": "svg"
+    }
+  },
+  {
+    "id": "asset_010",
+    "filename": "product-demo-video.mp4",
+    "path": "/videos/products/",
+    "type": "video",
+    "mimeType": "video/mp4",
+    "size": 45600000,
+    "metadata": {
+      "title": "Product Demo Reel",
+      "tags": ["video", "demo", "products", "marketing"],
+      "duration": 180,
+      "resolution": "1920x1080"
+    }
+  },
+  {
+    "id": "asset_011",
+    "filename": "smartwatch-fitness-promo.jpg",
+    "path": "/images/products/wearables/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 289000,
+    "metadata": {
+      "alt": "FitPro Smart Watch on wrist during workout",
+      "title": "FitPro Fitness Promo",
+      "tags": ["smartwatch", "fitness", "sports", "lifestyle"],
+      "width": 2800,
+      "height": 1867
+    }
+  },
+  {
+    "id": "asset_012",
+    "filename": "monitor-4k-workspace.jpg",
+    "path": "/images/products/monitors/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 378000,
+    "metadata": {
+      "alt": "4K Professional Monitor in creative workspace",
+      "title": "ViewPro Monitor Workspace",
+      "tags": ["monitor", "4K", "creative", "workspace"],
+      "width": 3200,
+      "height": 2133
+    }
+  },
+  {
+    "id": "asset_013",
+    "filename": "keyboard-rgb-close.jpg",
+    "path": "/images/products/peripherals/",
+    "type": "image",
+    "mimeType": "image/jpeg",
+    "size": 234000,
+    "metadata": {
+      "alt": "Mechanical keyboard with RGB lighting closeup",
+      "title": "KeyMaster RGB Closeup",
+      "tags": ["keyboard", "mechanical", "RGB", "gaming"],
+      "width": 2400,
+      "height": 1600
+    }
+  },
+  {
+    "id": "asset_014",
+    "filename": "user-manual-template.docx",
+    "path": "/documents/templates/",
+    "type": "document",
+    "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "size": 156000,
+    "metadata": {
+      "title": "User Manual Template",
+      "tags": ["template", "manual", "documentation", "internal"],
+      "pages": 12,
+      "language": "en"
+    }
+  },
+  {
+    "id": "asset_015",
+    "filename": "pricing-sheet-q1-2024.xlsx",
+    "path": "/documents/sales/",
+    "type": "document",
+    "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "size": 89000,
+    "metadata": {
+      "title": "Q1 2024 Pricing Sheet",
+      "tags": ["pricing", "sales", "Q1", "2024"],
+      "sheets": 3,
+      "language": "en"
+    }
+  }
+]

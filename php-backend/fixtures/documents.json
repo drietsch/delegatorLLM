@@ -1,0 +1,190 @@
+[
+  {
+    "id": "doc_001",
+    "title": "Welcome to Our Store",
+    "type": "page",
+    "path": "/",
+    "content": "Welcome to the leading online destination for premium electronics and office equipment. We offer a carefully curated selection of laptops, smartphones, audio equipment, and ergonomic office furniture. Our commitment to quality means every product is tested and backed by our satisfaction guarantee.",
+    "snippet": "Leading online destination for premium electronics and office equipment.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Premium Electronics & Office Equipment | Official Store",
+      "metaDescription": "Shop premium laptops, smartphones, audio gear, and ergonomic office furniture. Free shipping on orders over $50.",
+      "keywords": ["electronics", "office equipment", "laptops", "smartphones"]
+    }
+  },
+  {
+    "id": "doc_002",
+    "title": "About Us",
+    "type": "page",
+    "path": "/about",
+    "content": "Founded in 2010, we started with a simple mission: to provide professionals with the best tools to do their work. Today, we serve customers in over 50 countries with a focus on quality, innovation, and exceptional customer service. Our team of experts carefully selects each product in our catalog.",
+    "snippet": "Founded in 2010 with a mission to provide professionals with the best tools.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "About Us | Our Story & Mission",
+      "metaDescription": "Learn about our journey from a small startup to a global leader in premium electronics and office equipment.",
+      "keywords": ["about us", "company history", "mission"]
+    }
+  },
+  {
+    "id": "doc_003",
+    "title": "Shipping & Delivery",
+    "type": "page",
+    "path": "/shipping",
+    "content": "We offer free standard shipping on all orders over $50. Express shipping available for an additional fee. Most orders ship within 24 hours. International shipping available to select countries. Track your order in real-time through our website or mobile app.",
+    "snippet": "Free standard shipping on orders over $50. Express shipping available.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Shipping & Delivery Information",
+      "metaDescription": "Free shipping on orders over $50. Express delivery available. International shipping to 50+ countries.",
+      "keywords": ["shipping", "delivery", "free shipping", "express"]
+    }
+  },
+  {
+    "id": "doc_004",
+    "title": "Return Policy",
+    "type": "page",
+    "path": "/returns",
+    "content": "We offer a 30-day hassle-free return policy on most items. Products must be returned in original packaging with all accessories. Refunds processed within 5-7 business days. Defective products can be exchanged within 1 year under warranty. Contact our support team to initiate a return.",
+    "snippet": "30-day hassle-free return policy. Refunds within 5-7 business days.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Return Policy | 30-Day Returns",
+      "metaDescription": "Easy 30-day returns. Full refund on unopened items. 1-year warranty on all products.",
+      "keywords": ["returns", "refund", "warranty", "exchange"]
+    }
+  },
+  {
+    "id": "doc_005",
+    "title": "Laptop Buying Guide",
+    "type": "article",
+    "path": "/guides/laptop-buying-guide",
+    "content": "Choosing the right laptop depends on your needs. For business professionals, look for portability and battery life. Creative professionals need powerful processors and color-accurate displays. Consider RAM (minimum 8GB for most tasks), storage type (SSD recommended), and screen size based on your mobility needs.",
+    "snippet": "Complete guide to choosing the right laptop for your needs.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Laptop Buying Guide 2024 | Expert Tips",
+      "metaDescription": "Expert guide to choosing the perfect laptop. Compare processors, RAM, storage, and display options.",
+      "keywords": ["laptop guide", "buying guide", "how to choose laptop"]
+    },
+    "author": "Tech Team",
+    "publishedAt": "2024-01-15"
+  },
+  {
+    "id": "doc_006",
+    "title": "Setting Up Your Ergonomic Workspace",
+    "type": "article",
+    "path": "/guides/ergonomic-workspace",
+    "content": "An ergonomic workspace can prevent injury and boost productivity. Start with monitor placement at eye level, about arm's length away. Your chair should support your lower back with feet flat on the floor. Standing desks should be set so elbows are at 90 degrees when typing.",
+    "snippet": "Expert tips for creating a healthy, productive ergonomic workspace.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Ergonomic Workspace Setup Guide",
+      "metaDescription": "Learn how to set up an ergonomic workspace that prevents injury and boosts productivity.",
+      "keywords": ["ergonomic", "workspace", "standing desk", "office setup"]
+    },
+    "author": "Wellness Team",
+    "publishedAt": "2024-02-01"
+  },
+  {
+    "id": "doc_007",
+    "title": "Best Laptops for Remote Work",
+    "type": "article",
+    "path": "/blog/best-laptops-remote-work",
+    "content": "Remote work requires reliable, portable technology. Our top picks combine long battery life, excellent webcams, and powerful performance. The Professional Laptop 15 Pro offers the best balance of power and portability, while the UltraBook 13 is perfect for frequent travelers.",
+    "snippet": "Our top laptop picks for remote workers in 2024.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Best Laptops for Remote Work 2024",
+      "metaDescription": "Top laptop recommendations for remote workers. Compare features, battery life, and portability.",
+      "keywords": ["remote work", "work from home", "laptop", "best laptops"]
+    },
+    "author": "Tech Team",
+    "publishedAt": "2024-02-15"
+  },
+  {
+    "id": "doc_008",
+    "title": "Contact Us",
+    "type": "page",
+    "path": "/contact",
+    "content": "Get in touch with our customer support team. Email: support@example.com, Phone: 1-800-555-0123, Hours: Monday-Friday 9AM-6PM EST. For business inquiries: business@example.com. Visit our FAQ page for instant answers to common questions.",
+    "snippet": "Contact our support team via email, phone, or live chat.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Contact Us | Customer Support",
+      "metaDescription": "Get in touch with our customer support team. Email, phone, and live chat available.",
+      "keywords": ["contact", "support", "customer service", "help"]
+    }
+  },
+  {
+    "id": "doc_009",
+    "title": "Privacy Policy",
+    "type": "page",
+    "path": "/privacy",
+    "content": "We respect your privacy and are committed to protecting your personal data. This policy explains how we collect, use, and safeguard your information. We never sell your data to third parties. You can request deletion of your data at any time by contacting our privacy team.",
+    "snippet": "Our commitment to protecting your personal data and privacy.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Privacy Policy",
+      "metaDescription": "Learn how we protect your personal data and privacy. GDPR compliant.",
+      "keywords": ["privacy", "data protection", "GDPR", "personal data"]
+    }
+  },
+  {
+    "id": "doc_010",
+    "title": "Terms of Service",
+    "type": "page",
+    "path": "/terms",
+    "content": "By using our website, you agree to these terms. All products are sold subject to availability. Prices may change without notice. We reserve the right to refuse service. Disputes will be resolved under the laws of Delaware, USA.",
+    "snippet": "Legal terms governing use of our website and services.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Terms of Service",
+      "metaDescription": "Legal terms and conditions for using our website and purchasing products.",
+      "keywords": ["terms", "conditions", "legal", "agreement"]
+    }
+  },
+  {
+    "id": "doc_011",
+    "title": "Choosing the Right Monitor for Creative Work",
+    "type": "article",
+    "path": "/guides/creative-monitor-guide",
+    "content": "Color accuracy is crucial for creative professionals. Look for monitors with at least 99% sRGB coverage, or 99% Adobe RGB for print work. Panel type matters: IPS offers best color accuracy, VA for contrast, and OLED for both. Consider calibration support and USB-C connectivity for modern workflows.",
+    "snippet": "How to choose the perfect monitor for design, photo, and video work.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "Monitor Guide for Creative Professionals",
+      "metaDescription": "Expert guide to choosing monitors for design, photography, and video editing.",
+      "keywords": ["monitor", "creative", "design", "color accuracy", "4K"]
+    },
+    "author": "Creative Team",
+    "publishedAt": "2024-03-01"
+  },
+  {
+    "id": "doc_012",
+    "title": "New Year Sale 2024",
+    "type": "landing",
+    "path": "/sale/new-year-2024",
+    "content": "Ring in the new year with our biggest sale ever! Save up to 40% on select laptops, monitors, and accessories. Limited time offer: Free premium headphones with any laptop purchase over $1000. Sale ends January 31st.",
+    "snippet": "Save up to 40% on electronics during our New Year Sale.",
+    "status": "published",
+    "language": "en",
+    "metadata": {
+      "metaTitle": "New Year Sale 2024 | Up to 40% Off",
+      "metaDescription": "Shop our biggest sale of the year. Up to 40% off laptops, monitors, and accessories.",
+      "keywords": ["sale", "new year", "discount", "deals"]
+    }
+  }
+]

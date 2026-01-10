@@ -1,0 +1,289 @@
+[
+  {
+    "id": "prod_001",
+    "sku": "LAPTOP-PRO-15",
+    "name": "Professional Laptop 15\" Pro",
+    "description": "High-performance laptop designed for business professionals. Features a stunning 15-inch Retina display, powerful processor, and all-day battery life. Perfect for presentations, data analysis, and creative work.",
+    "price": 1299.99,
+    "category": "electronics",
+    "subcategory": "laptops",
+    "attributes": {
+      "brand": "TechPro",
+      "color": "silver",
+      "memory": "16GB",
+      "storage": "512GB SSD",
+      "processor": "Intel Core i7",
+      "weight": "1.8kg"
+    },
+    "tags": ["laptop", "business", "portable", "high-performance"],
+    "stock": 45,
+    "active": true
+  },
+  {
+    "id": "prod_002",
+    "sku": "LAPTOP-ULTRA-13",
+    "name": "UltraBook 13\" Lightweight",
+    "description": "Ultra-lightweight laptop weighing just 1.1kg. Perfect for travelers and mobile workers who need power on the go. Features a beautiful edge-to-edge display and instant wake technology.",
+    "price": 999.99,
+    "category": "electronics",
+    "subcategory": "laptops",
+    "attributes": {
+      "brand": "TechPro",
+      "color": "space gray",
+      "memory": "8GB",
+      "storage": "256GB SSD",
+      "processor": "Intel Core i5",
+      "weight": "1.1kg"
+    },
+    "tags": ["laptop", "ultrabook", "travel", "lightweight"],
+    "stock": 78,
+    "active": true
+  },
+  {
+    "id": "prod_003",
+    "sku": "PHONE-X12-PRO",
+    "name": "SmartPhone X12 Pro Max",
+    "description": "Flagship smartphone with professional-grade camera system. Captures stunning photos in any lighting condition. Features 5G connectivity, all-day battery, and the most advanced mobile processor.",
+    "price": 1099.00,
+    "category": "electronics",
+    "subcategory": "smartphones",
+    "attributes": {
+      "brand": "MobileTech",
+      "color": "midnight blue",
+      "storage": "256GB",
+      "display": "6.7 inch OLED",
+      "camera": "108MP triple camera"
+    },
+    "tags": ["smartphone", "5G", "camera", "flagship"],
+    "stock": 120,
+    "active": true
+  },
+  {
+    "id": "prod_004",
+    "sku": "HEADPHONE-WL-NC",
+    "name": "Wireless Noise-Canceling Headphones",
+    "description": "Premium wireless headphones with industry-leading noise cancellation. Enjoy up to 30 hours of wireless playback. Features adaptive sound control and speak-to-chat technology.",
+    "price": 349.99,
+    "category": "electronics",
+    "subcategory": "audio",
+    "attributes": {
+      "brand": "AudioMax",
+      "color": "matte black",
+      "battery": "30 hours",
+      "connectivity": "Bluetooth 5.2",
+      "driver": "40mm"
+    },
+    "tags": ["headphones", "wireless", "noise-canceling", "premium"],
+    "stock": 200,
+    "active": true
+  },
+  {
+    "id": "prod_005",
+    "sku": "WATCH-FIT-PRO",
+    "name": "FitPro Smart Watch",
+    "description": "Advanced fitness smartwatch with comprehensive health monitoring. Tracks heart rate, sleep, blood oxygen, and over 100 workout types. Water-resistant to 50 meters.",
+    "price": 299.00,
+    "category": "electronics",
+    "subcategory": "wearables",
+    "attributes": {
+      "brand": "FitTech",
+      "color": "black/silver",
+      "display": "1.4 inch AMOLED",
+      "battery": "14 days",
+      "waterproof": "50m"
+    },
+    "tags": ["smartwatch", "fitness", "health", "sports"],
+    "stock": 89,
+    "active": true
+  },
+  {
+    "id": "prod_006",
+    "sku": "CHAIR-ERGO-PRO",
+    "name": "Ergonomic Office Chair Pro",
+    "description": "Premium ergonomic office chair with advanced lumbar support system. Fully adjustable armrests, seat depth, and headrest. Breathable mesh back keeps you cool during long work sessions.",
+    "price": 599.00,
+    "category": "furniture",
+    "subcategory": "office chairs",
+    "attributes": {
+      "brand": "ComfortWork",
+      "color": "charcoal gray",
+      "material": "mesh/fabric",
+      "maxWeight": "150kg",
+      "warranty": "10 years"
+    },
+    "tags": ["chair", "ergonomic", "office", "comfort"],
+    "stock": 34,
+    "active": true
+  },
+  {
+    "id": "prod_007",
+    "sku": "DESK-STAND-EL",
+    "name": "Electric Standing Desk",
+    "description": "Height-adjustable standing desk with dual motor system. Smooth and quiet height adjustment from 60cm to 125cm. Features programmable memory presets and anti-collision technology.",
+    "price": 749.00,
+    "category": "furniture",
+    "subcategory": "desks",
+    "attributes": {
+      "brand": "ElevateDesk",
+      "color": "walnut/white",
+      "dimensions": "160x80cm",
+      "heightRange": "60-125cm",
+      "loadCapacity": "120kg"
+    },
+    "tags": ["desk", "standing", "electric", "adjustable"],
+    "stock": 22,
+    "active": true
+  },
+  {
+    "id": "prod_008",
+    "sku": "MONITOR-4K-32",
+    "name": "4K Professional Monitor 32\"",
+    "description": "32-inch 4K UHD professional monitor with exceptional color accuracy. Factory calibrated for creative work. Features USB-C connectivity with 90W power delivery.",
+    "price": 899.00,
+    "category": "electronics",
+    "subcategory": "monitors",
+    "attributes": {
+      "brand": "ViewPro",
+      "resolution": "3840x2160",
+      "panelType": "IPS",
+      "colorGamut": "99% Adobe RGB",
+      "connectivity": "USB-C, HDMI, DisplayPort"
+    },
+    "tags": ["monitor", "4K", "professional", "creative"],
+    "stock": 56,
+    "active": true
+  },
+  {
+    "id": "prod_009",
+    "sku": "KEYBOARD-MECH",
+    "name": "Mechanical Keyboard RGB",
+    "description": "Premium mechanical keyboard with hot-swappable switches. Per-key RGB lighting with millions of color options. Features PBT keycaps and programmable macros.",
+    "price": 149.99,
+    "category": "electronics",
+    "subcategory": "peripherals",
+    "attributes": {
+      "brand": "KeyMaster",
+      "switches": "Gateron Brown",
+      "layout": "Full-size",
+      "lighting": "RGB per-key",
+      "connectivity": "Wired USB-C"
+    },
+    "tags": ["keyboard", "mechanical", "RGB", "gaming"],
+    "stock": 145,
+    "active": true
+  },
+  {
+    "id": "prod_010",
+    "sku": "MOUSE-ERGO-WL",
+    "name": "Ergonomic Wireless Mouse",
+    "description": "Vertical ergonomic mouse designed to reduce wrist strain. Features precision optical sensor and silent clicks. Rechargeable with up to 3 months battery life.",
+    "price": 79.99,
+    "category": "electronics",
+    "subcategory": "peripherals",
+    "attributes": {
+      "brand": "ErgoTech",
+      "color": "graphite",
+      "dpi": "4000",
+      "battery": "Rechargeable",
+      "connectivity": "Bluetooth/2.4GHz"
+    },
+    "tags": ["mouse", "ergonomic", "wireless", "vertical"],
+    "stock": 210,
+    "active": true
+  },
+  {
+    "id": "prod_011",
+    "sku": "BACKPACK-TECH",
+    "name": "Tech Travel Backpack",
+    "description": "Water-resistant backpack designed for tech professionals. Features padded laptop compartment, cable organizer, and USB charging port. TSA-friendly design for easy airport security.",
+    "price": 129.00,
+    "category": "accessories",
+    "subcategory": "bags",
+    "attributes": {
+      "brand": "TravelPro",
+      "color": "navy",
+      "capacity": "25L",
+      "laptopSize": "up to 17 inch",
+      "material": "Water-resistant nylon"
+    },
+    "tags": ["backpack", "travel", "tech", "water-resistant"],
+    "stock": 67,
+    "active": true
+  },
+  {
+    "id": "prod_012",
+    "sku": "WEBCAM-4K-PRO",
+    "name": "4K Pro Webcam",
+    "description": "Professional 4K webcam with AI-powered auto-framing. Features advanced low-light correction and noise-reducing microphones. Perfect for video conferences and content creation.",
+    "price": 199.00,
+    "category": "electronics",
+    "subcategory": "peripherals",
+    "attributes": {
+      "brand": "StreamPro",
+      "resolution": "4K/30fps",
+      "fov": "90 degrees",
+      "microphone": "Dual omnidirectional",
+      "connectivity": "USB-C"
+    },
+    "tags": ["webcam", "4K", "streaming", "video conferencing"],
+    "stock": 88,
+    "active": true
+  },
+  {
+    "id": "prod_013",
+    "sku": "TABLET-PRO-12",
+    "name": "Creative Tablet Pro 12.9\"",
+    "description": "Professional tablet for creative work with 12.9-inch Liquid Retina display. Supports stylus with pressure sensitivity and tilt detection. Powerful enough to run desktop-class creative apps.",
+    "price": 1199.00,
+    "category": "electronics",
+    "subcategory": "tablets",
+    "attributes": {
+      "brand": "CreateTech",
+      "display": "12.9 inch Liquid Retina",
+      "storage": "256GB",
+      "stylus": "Included",
+      "battery": "10 hours"
+    },
+    "tags": ["tablet", "creative", "professional", "stylus"],
+    "stock": 42,
+    "active": true
+  },
+  {
+    "id": "prod_014",
+    "sku": "CHARGER-GAN-100",
+    "name": "100W GaN USB-C Charger",
+    "description": "Compact 100W GaN charger with 4 ports. Simultaneously charge laptop, tablet, phone, and accessories. 40% smaller than traditional chargers with same power output.",
+    "price": 89.99,
+    "category": "electronics",
+    "subcategory": "chargers",
+    "attributes": {
+      "brand": "PowerMax",
+      "output": "100W total",
+      "ports": "2x USB-C, 2x USB-A",
+      "technology": "GaN III",
+      "weight": "200g"
+    },
+    "tags": ["charger", "GaN", "USB-C", "fast-charging"],
+    "stock": 156,
+    "active": true
+  },
+  {
+    "id": "prod_015",
+    "sku": "SPEAKER-BT-360",
+    "name": "360° Bluetooth Speaker",
+    "description": "Portable Bluetooth speaker with 360-degree sound projection. Water and dust resistant (IP67). Features 24-hour battery life and built-in microphone for calls.",
+    "price": 179.00,
+    "category": "electronics",
+    "subcategory": "audio",
+    "attributes": {
+      "brand": "SoundWave",
+      "color": "forest green",
+      "battery": "24 hours",
+      "waterproof": "IP67",
+      "connectivity": "Bluetooth 5.3"
+    },
+    "tags": ["speaker", "bluetooth", "portable", "waterproof"],
+    "stock": 93,
+    "active": true
+  }
+]
