@@ -3,12 +3,19 @@ node_modules/
 
 # PHP Backend
 php-backend/.env
-php-backend/storage/sessions/
-php-backend/storage/messages/
-php-backend/storage/tools/
-php-backend/storage/workflows/
-php-backend/storage/queue/
 php-backend/embeddings/
+
+# Storage runtime data (keep .gitkeep files)
+php-backend/storage/sessions/*.json
+php-backend/storage/messages/*.jsonl
+php-backend/storage/tools/*.jsonl
+php-backend/storage/workflows/runs/*.json
+php-backend/storage/workflows/events/*.jsonl
+php-backend/storage/queue/jobs/*.json
+php-backend/storage/queue/leases/*.lock
+php-backend/storage/attachments/bin/*
+php-backend/storage/attachments/meta/*.json
+!php-backend/storage/**/.gitkeep
 
 
 # Build output
