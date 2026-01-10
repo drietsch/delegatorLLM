@@ -405,3 +405,127 @@
     display: none;
   }
 }
+
+/* Assistant message content with tool calls */
+.assistant-message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.assistant-message-content .text-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Tool call bubbles inside assistant messages */
+.assistant-message-content .tool-call-bubble {
+  margin: 0;
+}
+
+/* Markdown content styling */
+.bubble-list .ant-typography {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.bubble-list .ant-typography h1,
+.bubble-list .ant-typography h2,
+.bubble-list .ant-typography h3,
+.bubble-list .ant-typography h4,
+.bubble-list .ant-typography h5,
+.bubble-list .ant-typography h6 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.bubble-list .ant-typography h1 { font-size: 1.3em; }
+.bubble-list .ant-typography h2 { font-size: 1.2em; }
+.bubble-list .ant-typography h3 { font-size: 1.1em; }
+.bubble-list .ant-typography h4,
+.bubble-list .ant-typography h5,
+.bubble-list .ant-typography h6 { font-size: 1em; }
+
+.bubble-list .ant-typography p {
+  margin-bottom: 0.5em;
+}
+
+.bubble-list .ant-typography p:last-child {
+  margin-bottom: 0;
+}
+
+.bubble-list .ant-typography ul,
+.bubble-list .ant-typography ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.bubble-list .ant-typography li {
+  margin: 0.25em 0;
+}
+
+.bubble-list .ant-typography code {
+  background: rgba(99, 102, 241, 0.08);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+}
+
+.bubble-list .ant-typography pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 0.5em 0;
+  overflow-x: auto;
+  font-size: 0.85em;
+}
+
+.bubble-list .ant-typography pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.bubble-list .ant-typography blockquote {
+  border-left: 3px solid #6366f1;
+  margin: 0.5em 0;
+  padding-left: 1em;
+  color: #64748b;
+}
+
+.bubble-list .ant-typography a {
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.bubble-list .ant-typography a:hover {
+  text-decoration: underline;
+}
+
+.bubble-list .ant-typography table {
+  border-collapse: collapse;
+  margin: 0.5em 0;
+  font-size: 0.9em;
+}
+
+.bubble-list .ant-typography th,
+.bubble-list .ant-typography td {
+  border: 1px solid #e2e8f0;
+  padding: 6px 10px;
+}
+
+.bubble-list .ant-typography th {
+  background: #f8fafc;
+  font-weight: 600;
+}
+
+.bubble-list .ant-typography hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 1em 0;
+}

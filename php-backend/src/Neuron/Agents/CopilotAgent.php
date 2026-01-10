@@ -54,7 +54,7 @@ class CopilotAgent extends Agent
     /**
      * Define the system instructions for the agent.
      */
-    protected function instructions(): string
+    public function instructions(): string
     {
         return <<<'PROMPT'
 You are a Pimcore Copilot assistant - an intelligent AI helper for content management,

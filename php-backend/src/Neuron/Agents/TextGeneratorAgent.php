@@ -34,7 +34,7 @@ class TextGeneratorAgent extends Agent
         return ProviderFactory::create($this->providerName, $this->modelName);
     }
 
-    protected function instructions(): string
+    public function instructions(): string
     {
         $tone = $this->options['tone'] ?? 'professional';
         $length = $this->options['length'] ?? 'medium';

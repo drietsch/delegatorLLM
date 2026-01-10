@@ -8,11 +8,29 @@ export type SessionStatus =
   | 'completed'   // Task finished, results ready
   | 'error';      // Something went wrong
 
+// Tool call tracking for agent tool use
+export interface ToolCall {
+  id: string;
+  name: string;
+  args: Record<string, unknown>;
+  status: 'pending' | 'executing' | 'completed' | 'error';
+}
+
+// Tool execution result
+export interface ToolResult {
+  toolCallId: string;
+  result: unknown;
+  error?: string;
+}
+
 export interface SessionMessage {
   id: string;
   role: 'user' | 'assistant' | 'system';
   content: string;
   timestamp: number;
+  toolCalls?: ToolCall[];      // Tool calls made during this message
+  toolResults?: ToolResult[];  // Results from tool executions
+  isStreaming?: boolean;       // Whether this message is still streaming
 }
 
 export interface Session {

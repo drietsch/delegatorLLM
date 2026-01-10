@@ -7,6 +7,9 @@ declare(strict_types=1);
  * Handles autoloading, environment setup, and configuration initialization.
  */
 
+// Load Composer autoloader for vendor dependencies (NeuronAI, Guzzle, etc.)
+require_once __DIR__ . '/../vendor/autoload.php';
+
 // Load environment variables from .env if available
 $envFile = __DIR__ . '/../.env';
 if (file_exists($envFile)) {

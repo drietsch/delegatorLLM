@@ -4,13 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Agent Delegator is a proof-of-concept demonstrating browser-based semantic routing to specialized AI agents with a **Neuron AI-powered PHP backend**. The routing decision runs 100% client-side using a compact multilingual embedding model (Xenova/paraphrase-multilingual-MiniLM-L12-v2), while agent execution happens server-side via real LLM calls through Anthropic Claude, OpenAI, or Ollama.
+Agent Delegator is a proof-of-concept demonstrating browser-based semantic routing to specialized AI agents with a **Neuron AI-powered PHP backend** featuring **MCP (Model Context Protocol)** integration for standardized tool interoperability. The routing decision runs 100% client-side using a compact multilingual embedding model (Xenova/paraphrase-multilingual-MiniLM-L12-v2), while agent execution happens server-side via real LLM calls through Anthropic Claude, OpenAI, or Ollama.
 
 ## Tech Stack
 
 - **Frontend**: React 18 + TypeScript + Vite + Ant Design (including @ant-design/x for chat components)
 - **ML Inference**: @huggingface/transformers running ONNX models via WebAssembly in a Web Worker
 - **Backend**: PHP 8.2-FPM + Nginx + Neuron AI framework
+- **Tool Protocol**: MCP (Model Context Protocol) for standardized AI tools
 - **LLM Providers**: Anthropic Claude (default), OpenAI, Ollama
 - **Persistence**: File-based (JSON/JSONL) - no database required
 - **Deployment**: Docker multi-stage build, hosted on Fly.io
@@ -77,7 +78,13 @@ fly deploy               # Deploy to Fly.io
 │  ├── GET  /api/rag/stats        → RAG index stats           │
 │  ├── POST /api/rag/search       → RAG retrieval             │
 │  ├── POST /api/copilot/{tool}   → direct tool execution     │
-│  └── GET  /api/queue/stats      → job queue stats           │
+│  ├── GET  /api/queue/stats      → job queue stats           │
+│  │                                                          │
+│  │  MCP Endpoints:                                          │
+│  ├── GET  /api/mcp/servers      → list MCP servers          │
+│  ├── GET  /api/mcp/tools        → list all MCP tools        │
+│  ├── POST /api/mcp/tools/call   → call any MCP tool         │
+│  └── POST /api/mcp/{server}     → JSON-RPC 2.0 endpoint     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -91,6 +98,10 @@ fly deploy               # Deploy to Fly.io
 | `src/hooks/useRouter.ts` | Web Worker communication hook |
 | `src/context/MultiSessionContext.tsx` | Global state for multi-session chat management |
 | `src/components/ChatStage/ChatStage.tsx` | Main chat interface with agent routing |
+| `src/components/Layout/NavHeader.tsx` | Navigation header with page routing |
+| `src/components/Layout/PowerStripLayout.tsx` | Main 3-panel layout with page support |
+| `src/pages/ApiDocs.tsx` | API documentation page |
+| `src/pages/Examples.tsx` | Example queries page with "Try" functionality |
 | `agents.json` | Agent definitions with names, descriptions, skills, and endpoints |
 
 ### Backend (php-backend/)
@@ -107,6 +118,10 @@ fly deploy               # Deploy to Fly.io
 | `src/Neuron/ToolRegistry.php` | Parses agents.json, creates Neuron Tools |
 | `src/Neuron/Streaming/SseEmitter.php` | SSE streaming in frontend format |
 | `src/Neuron/Agents/*.php` | Agent implementations (Copilot, Translator, etc.) |
+| `src/MCP/Server/McpServer.php` | Base MCP server implementation |
+| `src/MCP/Client/McpClient.php` | External MCP client |
+| `src/MCP/McpRegistry.php` | Registry for all MCP servers and clients |
+| `src/MCP/Tools/*.php` | MCP tool servers (SearchMcp, DataObjectMcp, AssetMcp) |
 | `src/Tools/*.php` | Tool implementations (Search, DataObject, Asset) |
 | `src/Persistence/*.php` | Session, Message, ToolLog stores |
 | `src/Queue/JobQueue.php` | File-based async job queue |
@@ -142,6 +157,28 @@ Frontend expects line-prefixed format:
 - `d:` - Done/finish
 - `e:` - Error
 - `w:` - Workflow event
+
+### MCP (Model Context Protocol) Integration
+
+The backend implements the [Model Context Protocol](https://modelcontextprotocol.io/) for standardized AI tool interoperability:
+
+```php
+// List available MCP servers
+$registry = new McpRegistry();
+$servers = $registry->listServers();
+
+// Call an MCP tool
+$result = $registry->callTool('advanced_search', ['query' => 'laptops']);
+
+// JSON-RPC 2.0 endpoint
+POST /api/mcp/search
+{"jsonrpc": "2.0", "method": "tools/call", "params": {...}, "id": 1}
+```
+
+Available MCP Servers:
+- `search` - Product and content search
+- `dataobjects` - Data object CRUD operations
+- `assets` - Digital asset management
 
 ### File-based Persistence
 
@@ -196,6 +233,18 @@ DEFAULT_PROVIDER=anthropic
 DEFAULT_MODEL=claude-sonnet-4-20250514
 ```
 
+## Frontend Pages
+
+The frontend includes multiple pages accessible via the navigation header:
+
+| Page | Path | Description |
+|------|------|-------------|
+| Chat | `/` | Main chat interface with multi-session support |
+| API Docs | `/api-docs` | Interactive API documentation with endpoints, SSE protocol, MCP docs |
+| Examples | `/examples` | Sample queries with "Try" button to test in chat |
+
+Navigation is handled via state in `PowerStripLayout.tsx` with `NavHeader` providing the menu.
+
 ## Session Status Flow
 
 Sessions progress through: `routing` → `working` → `streaming` → `completed` (or `error`)
@@ -238,4 +287,17 @@ curl -X POST http://localhost:3001/api/rag/search \
 curl -X POST http://localhost:3001/api/copilot/advanced_search \
   -H "Content-Type: application/json" \
   -d '{"query": "laptop", "object_type": "product"}'
+
+# Streaming chat (requires ANTHROPIC_API_KEY)
+curl -X POST http://localhost:3001/api/chat/stream \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Search for laptops"}'
+
+# MCP tools list
+curl http://localhost:3001/api/mcp/tools
+
+# Direct MCP tool call
+curl -X POST http://localhost:3001/api/mcp/tools/call \
+  -H "Content-Type: application/json" \
+  -d '{"name": "advanced_search", "arguments": {"query": "laptops"}}'
 ```

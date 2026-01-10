@@ -24,7 +24,7 @@ class ToolRegistry
      */
     public function __construct(?string $agentsJsonPath = null)
     {
-        $path = $agentsJsonPath ?? BASE_PATH . '/agents.json';
+        $path = $agentsJsonPath ?? dirname(BASE_PATH) . '/agents.json';
 
         if (!file_exists($path)) {
             throw new \RuntimeException("agents.json not found: $path");

@@ -1,0 +1,75 @@
+.tool-call-bubble {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin: 8px 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tool-call-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tool-call-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tool-call-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.tool-call-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.tool-call-section {
+  margin-bottom: 12px;
+}
+
+.tool-call-section:last-child {
+  margin-bottom: 0;
+}
+
+.tool-call-code {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 6px 0 0 0;
+  overflow-x: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tool-call-code.error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* Animation for executing state */
+.tool-call-bubble .ant-spin {
+  margin-right: 4px;
+}
+
+/* Hover state for header */
+.tool-call-header:hover {
+  background: rgba(99, 102, 241, 0.04);
+  border-radius: 8px;
+  margin: -4px;
+  padding: 4px;
+}

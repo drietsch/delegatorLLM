@@ -1,6 +1,7 @@
 import { useState, useRef, useMemo, useEffect, useCallback } from 'react';
 import { Card, Typography, Progress, Alert, Tag, Spin, Button, Dropdown, Flex, Tooltip, GetRef } from 'antd';
 import { Bubble, Sender, Prompts } from '@ant-design/x';
+import XMarkdown from '@ant-design/x-markdown';
 import {
   RobotOutlined,
   UserOutlined,
@@ -13,6 +14,7 @@ import {
 import { useMultiSession } from '../../context/MultiSessionContext';
 import { NotificationStack } from './NotificationPill';
 import { AttachmentChips } from './AttachmentChips';
+import { ToolCallBubble } from './ToolCallBubble';
 import { debounce } from '../../utils/debounce';
 import { useRouter } from '../../hooks/useRouter';
 import type { MenuProps } from 'antd';
@@ -23,6 +25,13 @@ import { API_BASE } from '../../config/api';
 import './ChatStage.css';
 
 const { Text, Title } = Typography;
+
+// Markdown renderer for assistant messages
+const renderMarkdown = (content: string) => (
+  <Typography>
+    <XMarkdown>{content}</XMarkdown>
+  </Typography>
+);
 
 // Example prompts
 const examplePrompts = [
@@ -41,7 +50,6 @@ export function ChatStage() {
     sendMessage,
     switchSession,
     dismissNotification,
-    createSession,
     minimizeToRail,
   } = useMultiSession();
 
@@ -137,16 +145,12 @@ export function ChatStage() {
   const handleSubmit = async (value: string) => {
     if (!value.trim() && attachments.length === 0) return;
 
-    // Create session if none exists
-    if (!activeSession) {
-      createSession();
-    }
-
     // Include attachment info in message
     const attachmentInfo = attachments.length > 0
       ? `\n\n[Attachments: ${attachments.map(a => a.name).join(', ')}]`
       : '';
 
+    // sendMessage will create a session if none exists
     await sendMessage(value.trim() + attachmentInfo);
     setInputValue('');
     setAttachments([]);
@@ -317,11 +321,14 @@ export function ChatStage() {
     </Flex>
   );
 
-  // Convert messages to Bubble.List format
+  // Convert messages to Bubble.List format with tool calls
   const bubbleItems = activeSession?.messages.map((msg) => ({
     key: msg.id,
     role: msg.role as 'user' | 'assistant',
     content: msg.content,
+    toolCalls: msg.toolCalls || [],
+    toolResults: msg.toolResults || [],
+    isStreaming: msg.isStreaming,
   })) || [];
 
   return (
@@ -463,13 +470,30 @@ export function ChatStage() {
                 index === bubbleItems.length - 1;
               const shouldAnimate = isLastAssistant &&
                 activeSession?.status === 'streaming';
+              const hasToolCalls = item.toolCalls && item.toolCalls.length > 0;
+
+              // Render tool calls + content for assistant messages
+              const messageContent = item.role === 'assistant' && hasToolCalls ? (
+                <div className="assistant-message-content">
+                  {item.toolCalls.map((tc) => (
+                    <ToolCallBubble
+                      key={tc.id}
+                      toolCall={tc}
+                      result={item.toolResults.find((r) => r.toolCallId === tc.id)}
+                    />
+                  ))}
+                  {item.content && <div className="text-content">{renderMarkdown(item.content)}</div>}
+                </div>
+              ) : item.content;
 
               return {
                 key: item.key,
                 role: item.role,
-                content: item.content,
-                loading: isSessionWorking && item.role === 'assistant' && !item.content,
-                typing: shouldAnimate ? { effect: 'typing', step: 5, interval: 20 } : undefined,
+                content: messageContent,
+                // Use contentRender for markdown rendering on assistant messages without tool calls
+                contentRender: item.role === 'assistant' && !hasToolCalls ? renderMarkdown : undefined,
+                loading: isSessionWorking && item.role === 'assistant' && !item.content && !hasToolCalls,
+                typing: shouldAnimate && !hasToolCalls ? { effect: 'typing', step: 5, interval: 20 } : undefined,
               };
             })}
           />

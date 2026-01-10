@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useCallback, useEffect, useRef } from 'react';
-import type { Session, SessionMessage, Notification } from '../types/session';
+import type { Session, SessionMessage, Notification, ToolCall, ToolResult } from '../types/session';
 import { useRouter } from '../hooks/useRouter';
 import { API_BASE } from '../config/api';
 
@@ -26,7 +26,7 @@ type Action =
   | { type: 'SET_ACTIVE_SESSION'; payload: string | null }
   | { type: 'UPDATE_SESSION'; payload: { id: string; updates: Partial<Session> } }
   | { type: 'ADD_MESSAGE'; payload: { sessionId: string; message: SessionMessage } }
-  | { type: 'UPDATE_MESSAGE'; payload: { sessionId: string; messageId: string; content: string } }
+  | { type: 'UPDATE_MESSAGE'; payload: { sessionId: string; messageId: string; updates: Partial<SessionMessage> } }
   | { type: 'ADD_NOTIFICATION'; payload: Notification }
   | { type: 'DISMISS_NOTIFICATION'; payload: string }
   | { type: 'SET_ROUTER_READY'; payload: boolean }
@@ -83,7 +83,7 @@ function reducer(state: MultiSessionState, action: Action): MultiSessionState {
           [action.payload.sessionId]: {
             ...session,
             messages: session.messages.map((msg) =>
-              msg.id === action.payload.messageId ? { ...msg, content: action.payload.content } : msg
+              msg.id === action.payload.messageId ? { ...msg, ...action.payload.updates } : msg
             ),
             updatedAt: Date.now(),
           },
@@ -124,7 +124,7 @@ interface MultiSessionContextType extends MultiSessionState {
   minimizeToRail: () => void;
 
   // Messaging
-  sendMessage: (content: string) => Promise<void>;
+  sendMessage: (content: string, sessionId?: string) => Promise<void>;
 
   // Notifications
   dismissNotification: (id: string) => void;
@@ -212,18 +212,40 @@ export function MultiSessionProvider({ children }: { children: React.ReactNode }
     dispatch({ type: 'SET_ACTIVE_SESSION', payload: newId });
   }, []);
 
-  // Send a message in the active session
+  // Send a message in the active session (or specified session)
   const sendMessage = useCallback(
-    async (content: string) => {
-      const sessionId = state.activeSessionId;
-      if (!sessionId || !isRouterReady) return;
+    async (content: string, targetSessionId?: string) => {
+      let sessionId = targetSessionId || state.activeSessionId;
 
+      // Create a new session if none exists
+      if (!sessionId) {
+        sessionId = generateId();
+        const newSession: Session = {
+          id: sessionId,
+          agent: null,
+          status: 'idle',
+          title: 'New Chat',
+          messages: [],
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+          hasUnread: false,
+        };
+        dispatch({ type: 'CREATE_SESSION', payload: newSession });
+        dispatch({ type: 'SET_ACTIVE_SESSION', payload: sessionId });
+      }
+
+      if (!isRouterReady) {
+        console.warn('sendMessage: Router not ready yet, waiting...');
+        // Don't return - proceed anyway but router might fail
+      }
+
+      // Get session from state, or use defaults for newly created session
       const session = state.sessions[sessionId];
-      if (!session) return;
+      const currentMessages = session?.messages || [];
 
       // Update title from first message
-      const isFirstMessage = session.messages.length === 0;
-      const title = isFirstMessage ? content.slice(0, 50) + (content.length > 50 ? '...' : '') : session.title;
+      const isFirstMessage = currentMessages.length === 0;
+      const title = isFirstMessage ? content.slice(0, 50) + (content.length > 50 ? '...' : '') : (session?.title || 'New Chat');
 
       // Add user message
       const userMessage: SessionMessage = {
@@ -259,6 +281,9 @@ export function MultiSessionProvider({ children }: { children: React.ReactNode }
           role: 'assistant',
           content: '',
           timestamp: Date.now(),
+          toolCalls: [],
+          toolResults: [],
+          isStreaming: true,
         };
         dispatch({ type: 'ADD_MESSAGE', payload: { sessionId, message: assistantMessage } });
 
@@ -266,8 +291,8 @@ export function MultiSessionProvider({ children }: { children: React.ReactNode }
         const abortController = new AbortController();
         executionAbortControllers.current[sessionId] = abortController;
 
-        // Execute agent
-        const response = await fetch(`${API_BASE}/api/chat`, {
+        // Execute agent via streaming endpoint
+        const response = await fetch(`${API_BASE}/api/chat/stream`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -286,6 +311,8 @@ export function MultiSessionProvider({ children }: { children: React.ReactNode }
 
         const decoder = new TextDecoder();
         let assistantContent = '';
+        const toolCalls: ToolCall[] = [];
+        const toolResults: ToolResult[] = [];
 
         while (true) {
           const { done, value } = await reader.read();
@@ -296,15 +323,89 @@ export function MultiSessionProvider({ children }: { children: React.ReactNode }
 
           for (const line of lines) {
             const prefix = line[0];
-            const data = line.slice(2);
+            const jsonData = line.slice(2);
 
             try {
-              if (prefix === '0') {
-                assistantContent += JSON.parse(data);
-                dispatch({
-                  type: 'UPDATE_MESSAGE',
-                  payload: { sessionId, messageId: assistantMessageId, content: assistantContent },
-                });
+              switch (prefix) {
+                case '0': {
+                  // Text token
+                  assistantContent += JSON.parse(jsonData);
+                  dispatch({
+                    type: 'UPDATE_MESSAGE',
+                    payload: {
+                      sessionId,
+                      messageId: assistantMessageId,
+                      updates: { content: assistantContent, toolCalls: [...toolCalls], toolResults: [...toolResults] },
+                    },
+                  });
+                  break;
+                }
+                case '9': {
+                  // Tool call start
+                  const tc = JSON.parse(jsonData);
+                  toolCalls.push({
+                    id: tc.toolCallId,
+                    name: tc.toolName,
+                    args: tc.args,
+                    status: 'executing',
+                  });
+                  dispatch({
+                    type: 'UPDATE_MESSAGE',
+                    payload: {
+                      sessionId,
+                      messageId: assistantMessageId,
+                      updates: { content: assistantContent, toolCalls: [...toolCalls], toolResults: [...toolResults] },
+                    },
+                  });
+                  break;
+                }
+                case 'a': {
+                  // Tool result
+                  const tr = JSON.parse(jsonData);
+                  toolResults.push({
+                    toolCallId: tr.toolCallId,
+                    result: tr.result,
+                    error: tr.error,
+                  });
+                  // Update the corresponding tool call status
+                  const toolIndex = toolCalls.findIndex((t) => t.id === tr.toolCallId);
+                  if (toolIndex >= 0) {
+                    toolCalls[toolIndex].status = tr.error ? 'error' : 'completed';
+                  }
+                  dispatch({
+                    type: 'UPDATE_MESSAGE',
+                    payload: {
+                      sessionId,
+                      messageId: assistantMessageId,
+                      updates: { content: assistantContent, toolCalls: [...toolCalls], toolResults: [...toolResults] },
+                    },
+                  });
+                  break;
+                }
+                case 'e': {
+                  // Error
+                  const errData = JSON.parse(jsonData);
+                  console.error('Stream error:', errData.message);
+                  break;
+                }
+                case 'd': {
+                  // Done - stream complete
+                  // Final update with isStreaming: false
+                  dispatch({
+                    type: 'UPDATE_MESSAGE',
+                    payload: {
+                      sessionId,
+                      messageId: assistantMessageId,
+                      updates: {
+                        content: assistantContent,
+                        toolCalls: [...toolCalls],
+                        toolResults: [...toolResults],
+                        isStreaming: false,
+                      },
+                    },
+                  });
+                  break;
+                }
               }
             } catch {
               // Ignore parse errors

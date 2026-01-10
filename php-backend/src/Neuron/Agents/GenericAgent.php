@@ -43,7 +43,7 @@ class GenericAgent extends Agent
         return ProviderFactory::create($this->providerName, $this->modelName);
     }
 
-    protected function instructions(): string
+    public function instructions(): string
     {
         if (!$this->agentDefinition) {
             return "You are a helpful AI assistant.";

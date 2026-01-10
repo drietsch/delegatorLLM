@@ -10,6 +10,7 @@ use App\Persistence\MessageStore;
 use App\Persistence\ToolLogStore;
 use NeuronAI\Chat\Messages\UserMessage;
 use NeuronAI\Chat\Messages\ToolCallMessage;
+use NeuronAI\Chat\Messages\ToolCallResultMessage;
 use Throwable;
 
 /**
@@ -99,16 +100,28 @@ class ChatController
     public function stream(array $request): void
     {
         $agentId = $request['agent'] ?? 'copilot';
-        $userMessages = $request['messages'] ?? [];
         $sessionId = $request['session_id'] ?? null;
         $provider = $request['provider'] ?? null;
         $model = $request['model'] ?? null;
         $ragOptions = $request['rag'] ?? null;
 
+        // Support both 'message' (string) and 'messages' (array) formats
+        $userContent = '';
+        if (isset($request['message']) && is_string($request['message'])) {
+            $userContent = $request['message'];
+        } elseif (isset($request['messages']) && is_array($request['messages'])) {
+            $userContent = $request['messages'][0]['content'] ?? '';
+        }
+
         // Initialize SSE emitter
         $emitter = new SseEmitter($sessionId);
 
         try {
+            // Validate message content
+            if (empty(trim($userContent))) {
+                throw new \InvalidArgumentException('Message content cannot be empty');
+            }
+
             // Get or create session
             if ($sessionId) {
                 $session = $this->sessions->get($sessionId);
@@ -120,9 +133,6 @@ class ChatController
                 $sessionId = $this->sessions->create($agentId);
                 $emitter->setSessionId($sessionId);
             }
-
-            // Store user message
-            $userContent = $userMessages[0]['content'] ?? '';
             $this->messages->append($sessionId, [
                 'role' => 'user',
                 'content' => $userContent,
@@ -137,15 +147,22 @@ class ChatController
 
             foreach ($agent->stream($message) as $chunk) {
                 if ($chunk instanceof ToolCallMessage) {
-                    // Handle tool calls
+                    // Tool call initiated - emit the tool call info
+                    foreach ($chunk->getTools() as $tool) {
+                        $toolCallId = $tool->getCallId();
+                        $toolName = $tool->getName();
+                        $toolInputs = $tool->getInputs();
+
+                        // Emit tool call start
+                        $emitter->toolCall($toolCallId, $toolName, $toolInputs);
+                    }
+                } elseif ($chunk instanceof ToolCallResultMessage) {
+                    // Tool execution completed - emit results
                     foreach ($chunk->getTools() as $tool) {
                         $toolCallId = $tool->getCallId();
                         $toolName = $tool->getName();
                         $toolInputs = $tool->getInputs();
                         $toolResult = $tool->getResult();
-
-                        // Emit tool call
-                        $emitter->toolCall($toolCallId, $toolName, $toolInputs);
 
                         // Log tool call
                         $this->toolLogs->append($sessionId, [
@@ -176,6 +193,11 @@ class ChatController
             $emitter->done('stop', [
                 'session_id' => $sessionId,
             ]);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            $response = $e->getResponse();
+            $body = $response ? $response->getBody()->getContents() : 'No response body';
+            $emitter->error($e->getMessage() . ' | Body: ' . $body, 'stream_error');
+            $emitter->done('error');
         } catch (Throwable $e) {
             $emitter->error($e->getMessage(), 'stream_error');
             $emitter->done('error');

@@ -1,9 +1,24 @@
-/* App Layout - Full width with Asset Tree + Chat Widget */
+/* App Layout - Full width with header + content */
 .app-layout {
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   background: #f1f5f9;
+}
+
+/* Main content area below header */
+.app-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Chat layout - Asset Tree + Chat Widget */
+.chat-layout {
+  flex: 1;
+  display: flex;
+  height: 100%;
 }
 
 /* Asset Panel - Left side (75%) */
@@ -16,7 +31,7 @@
 /* Chat Widget - Right side (25%) */
 .chat-widget {
   width: 25%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   background: #ffffff;
   position: relative;

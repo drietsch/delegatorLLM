@@ -645,6 +645,125 @@ if ($method === 'POST' && $uri === '/api/rag/build') {
 }
 
 // ============================================================================
+// MCP ENDPOINTS
+// ============================================================================
+
+use App\MCP\McpRegistry;
+
+// POST /api/mcp/{server} - MCP server endpoint
+if ($method === 'POST' && preg_match('#^/api/mcp/([a-z]+)$#', $uri, $m)) {
+    $serverName = $m[1];
+    $request = json_decode(file_get_contents('php://input'), true);
+
+    if (!$request) {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode(['jsonrpc' => '2.0', 'error' => ['code' => -32700, 'message' => 'Parse error']]);
+        exit;
+    }
+
+    try {
+        $registry = McpRegistry::getInstance();
+        $server = $registry->getServer($serverName);
+
+        if (!$server) {
+            http_response_code(404);
+            header('Content-Type: application/json');
+            echo json_encode(['jsonrpc' => '2.0', 'error' => ['code' => -32601, 'message' => "Server not found: $serverName"]]);
+            exit;
+        }
+
+        header('Content-Type: application/json');
+        $response = $server->handleRequest($request);
+        echo json_encode($response);
+    } catch (\Throwable $e) {
+        http_response_code(500);
+        header('Content-Type: application/json');
+        echo json_encode(['jsonrpc' => '2.0', 'error' => ['code' => -32603, 'message' => $e->getMessage()]]);
+    }
+    exit;
+}
+
+// GET /api/mcp/tools - List all MCP tools
+if ($method === 'GET' && $uri === '/api/mcp/tools') {
+    try {
+        $registry = McpRegistry::getInstance();
+        $tools = $registry->getAllTools();
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'tools' => array_map(fn($t) => [
+                'name' => $t['name'],
+                'description' => $t['description'],
+                'source' => $t['source'],
+                'inputSchema' => $t['inputSchema'],
+            ], $tools),
+        ], JSON_PRETTY_PRINT);
+    } catch (\Throwable $e) {
+        http_response_code(500);
+        header('Content-Type: application/json');
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+    exit;
+}
+
+// POST /api/mcp/tools/call - Call an MCP tool
+if ($method === 'POST' && $uri === '/api/mcp/tools/call') {
+    $request = json_decode(file_get_contents('php://input'), true);
+
+    if (!$request || !isset($request['name'])) {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'Missing tool name']);
+        exit;
+    }
+
+    try {
+        $registry = McpRegistry::getInstance();
+        $result = $registry->callTool($request['name'], $request['arguments'] ?? []);
+
+        header('Content-Type: application/json');
+        echo json_encode($result);
+    } catch (\Throwable $e) {
+        http_response_code(500);
+        header('Content-Type: application/json');
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+    exit;
+}
+
+// GET /api/mcp/servers - List registered MCP servers
+if ($method === 'GET' && $uri === '/api/mcp/servers') {
+    try {
+        $registry = McpRegistry::getInstance();
+        $servers = $registry->getServers();
+
+        $serverList = [];
+        foreach ($servers as $name => $server) {
+            $info = $server->handleRequest([
+                'id' => 'info',
+                'method' => 'initialize',
+                'params' => [],
+            ]);
+
+            $serverList[] = [
+                'name' => $name,
+                'endpoint' => "/api/mcp/$name",
+                'info' => $info['result'] ?? [],
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode(['servers' => $serverList], JSON_PRETTY_PRINT);
+    } catch (\Throwable $e) {
+        http_response_code(500);
+        header('Content-Type: application/json');
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+    exit;
+}
+
+// ============================================================================
 // 404 - Not Found
 // ============================================================================
 

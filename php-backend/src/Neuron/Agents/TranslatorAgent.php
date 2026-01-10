@@ -50,7 +50,7 @@ class TranslatorAgent extends Agent
         return ProviderFactory::create($this->providerName, $this->modelName);
     }
 
-    protected function instructions(): string
+    public function instructions(): string
     {
         $sourceLanguage = $this->options['source_language'] ?? 'auto';
         $targetLanguage = $this->options['target_language'] ?? 'en';

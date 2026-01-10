@@ -1,0 +1,202 @@
+/* Pages common styles */
+
+.page-container {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #fafbfc 0%, #f1f5f9 100%);
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-icon {
+  font-size: 40px;
+  color: #6366f1;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.page-header h2 {
+  margin: 0 0 4px 0 !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+}
+
+.page-card {
+  margin-bottom: 16px;
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.page-card .ant-card-head {
+  border-bottom: 1px solid #f1f5f9;
+  min-height: auto;
+  padding: 12px 16px;
+}
+
+.page-card .ant-card-head-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.page-card .ant-card-body {
+  padding: 16px;
+}
+
+/* API Docs specific */
+.endpoint-details {
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.endpoint-section {
+  margin-bottom: 12px;
+}
+
+.endpoint-section:last-child {
+  margin-bottom: 0;
+}
+
+.endpoint-details pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.page-card code {
+  background: rgba(99, 102, 241, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Consolas', monospace;
+}
+
+.page-card .ant-table {
+  font-size: 13px;
+}
+
+.page-card .ant-table-thead > tr > th {
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* Examples specific */
+.intro-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05)) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+.example-item {
+  padding: 12px 0 !important;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.example-item:last-child {
+  border-bottom: none;
+}
+
+.example-query {
+  font-size: 14px !important;
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+.example-item .ant-list-item-meta-description {
+  margin-top: 4px;
+}
+
+.tips-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(5, 150, 105, 0.05)) !important;
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+.tips-card h4 {
+  color: #059669 !important;
+  margin-bottom: 12px !important;
+}
+
+.tips-card .ant-list-item {
+  padding: 6px 0 !important;
+  border: none !important;
+}
+
+/* Markdown content in docs */
+.page-card .ant-typography h2 {
+  font-size: 16px !important;
+  margin-top: 16px !important;
+  margin-bottom: 8px !important;
+}
+
+.page-card .ant-typography h3 {
+  font-size: 14px !important;
+  margin-top: 12px !important;
+  margin-bottom: 6px !important;
+}
+
+.page-card .ant-typography table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.page-card .ant-typography th,
+.page-card .ant-typography td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.page-card .ant-typography th {
+  background: #f8fafc;
+  font-weight: 600;
+}
+
+.page-card .ant-typography pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 12px;
+}
+
+.page-card .ant-typography code {
+  background: rgba(99, 102, 241, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Scrollbar styling */
+.page-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.page-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.page-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

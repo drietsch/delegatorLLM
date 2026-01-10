@@ -372,7 +372,7 @@
     },
     {
       "name": "advanced_search",
-      "description": "Search agent for finding products, objects, and data. Searches for items by attributes like color, size, category, name, or any property. Use this when users want to search, find, or look up specific items in the database. Example queries: search blue cars, find red shoes, look up large tables.",
+      "description": "Search agent for finding products, objects, and data. Searches for items by keywords and filters. Use this when users want to search, find, or look up specific items in the database. Example queries: search blue cars, find red shoes, look up large tables.",
       "skills": [
         "search",
         "search for",
@@ -403,33 +403,29 @@
       "endpoint": "/api/search",
       "function": {
         "name": "advanced_search",
-        "description": "Search for products and objects by attributes",
+        "description": "Search for products and objects by query and filters",
         "parameters": {
           "type": "object",
           "properties": {
-            "data_model": {
+            "query": {
               "type": "string",
-              "description": "The type of object to search for (e.g., cars, shoes, products, articles)"
+              "description": "Search query string (e.g., 'laptops', 'blue shoes', 'office furniture')"
             },
-            "color": {
+            "object_type": {
               "type": "string",
-              "description": "Color filter (e.g., blue, red, green)"
+              "description": "Type of object to search: product, asset, document, customer"
             },
-            "size": {
+            "filters": {
               "type": "string",
-              "description": "Size filter (e.g., small, medium, large)"
+              "description": "JSON string of attribute filters (e.g., '{\"color\": \"blue\", \"category\": \"electronics\"}')"
             },
-            "category": {
-              "type": "string",
-              "description": "Category filter"
-            },
-            "keywords": {
-              "type": "string",
-              "description": "Additional search keywords"
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of results to return (default: 10)"
             }
           },
           "required": [
-            "data_model"
+            "query"
           ]
         }
       }

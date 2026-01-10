@@ -38,7 +38,7 @@ class SearchAgent extends Agent
         return ProviderFactory::create($this->providerName, $this->modelName);
     }
 
-    protected function instructions(): string
+    public function instructions(): string
     {
         return <<<'PROMPT'
 You are a search assistant specialized in finding and presenting data from the Pimcore system.

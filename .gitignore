@@ -1,6 +1,16 @@
 # Dependencies
 node_modules/
 
+# PHP Backend
+php-backend/.env
+php-backend/storage/sessions/
+php-backend/storage/messages/
+php-backend/storage/tools/
+php-backend/storage/workflows/
+php-backend/storage/queue/
+php-backend/embeddings/
+
+
 # Build output
 dist/
 
