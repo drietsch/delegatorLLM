@@ -29,6 +29,11 @@ WORKDIR /var/www/api
 # Install PHP dependencies (skip if vendor already exists)
 RUN if [ ! -d "vendor" ]; then composer install --no-dev --optimize-autoloader; fi
 
+# Fix permissions for PHP-FPM (runs as nobody:nobody in Alpine)
+RUN chown -R nobody:nobody /var/www && \
+    chmod -R 755 /var/www && \
+    chmod -R 775 /var/www/api/storage
+
 # Create startup script
 RUN echo '#!/bin/sh' > /start.sh && \
     echo 'php-fpm -D' >> /start.sh && \
